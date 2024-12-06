@@ -33,7 +33,7 @@ export default function Hello() {
         const data = await response.json();
         setMessage(data.message);
       } catch (err) {
-        setError(err.message || "Failed to fetch data");
+        setError((err as Error).message || "Failed to fetch data");
       }
     };
 
