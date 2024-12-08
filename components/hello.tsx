@@ -2,7 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 
-export default function Hello() {
+interface HelloProps {
+  name: string;
+}
+
+export default function Hello({ name }: HelloProps) {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -22,7 +26,7 @@ export default function Hello() {
               "Content-Type": "application/json",
               "Authorization": `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
             },
-            body: JSON.stringify({ name: "Supabase" }),     // TODO: use a proper name
+            body: JSON.stringify({ name }),
           }
         );
 
@@ -38,7 +42,7 @@ export default function Hello() {
     };
 
     fetchData();
-  }, []);
+  }, [name]);
 
   return (
     <main className="flex flex-col items-center justify-center bg-gray-100 h-140px py-10">
