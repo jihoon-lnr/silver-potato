@@ -23,6 +23,11 @@ export default async function ItemList() {
         <div>
           <h1>Item List</h1>
           <p>No items available. Add some new items to get started!</p>
+          <Link href="/items/new">
+            <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+              New Item
+            </button>
+          </Link>
         </div>
       )
     }
@@ -30,6 +35,11 @@ export default async function ItemList() {
     return (
       <div>
         <h1>Item List</h1>
+        <Link href="/items/new">
+          <button className="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            New Item
+          </button>
+        </Link>
         <ul>
           {items.map((item) => (
             <li key={item.id}>
