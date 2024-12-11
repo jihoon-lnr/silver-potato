@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function NewItem() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [file, setFile] = useState(null);
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,15 +17,21 @@ export default function NewItem() {
     formData.append("content", content);
     if (file) formData.append("file", file);
 
-    const res = await fetch("/api/new-item", {
-      method: "POST",
-      body: formData,
-    });
+    try {
+      const res = await fetch("/api/new-item", {
+        method: "POST",
+        body: formData,
+      });
 
-    if (res.ok) {
-      alert("Item created successfully!");
-    } else {
-      alert("Failed to create item");
+      if (res.ok) {
+        alert("Item created successfully!");
+        router.push("/items");
+      } else {
+        const error = await res.json();
+        alert(`Failed to create item: ${error.message}`);
+      }
+    } catch (error) {
+      alert(`An unexpected error occurred: ${error.message}`);
     }
   };
 
