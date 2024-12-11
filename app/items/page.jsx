@@ -1,8 +1,17 @@
 import { createClient } from "@/utils/supabase/server"
+import { redirect } from "next/navigation"
 import Link from 'next/link'
 
 export default async function ItemList() {
   const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/sign-in");
+  }
 
   try {
     const { data: items, error } = await supabase.from('items').select('*')
