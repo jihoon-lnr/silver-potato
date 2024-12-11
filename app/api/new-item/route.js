@@ -5,6 +5,16 @@ export async function POST(req) {
   const supabase = await createClient();
 
   try {
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError) {
+      console.error("Failed to fetch user:", userError.message);
+      return NextResponse.json({ error: "Failed to fetch user info" }, { status: 401 });
+    }
+
     const contentType = req.headers.get("content-type") || "";
     if (!contentType.includes("multipart/form-data")) {
       console.error("Invalid content type:", contentType);
@@ -47,7 +57,12 @@ export async function POST(req) {
     }
 
     const { error: insertError } = await supabase.from("items").insert([
-      { title, content, file_url: fileUrl },
+      {
+        title,
+        content,
+        file_url: fileUrl,
+        author: user.email || "Unknown", // use email addr as author info
+      },
     ]);
 
     if (insertError) {
