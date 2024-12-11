@@ -48,7 +48,8 @@ export default function NewItem() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
-          className="mt-1 block w-full h-12 border border-gray-400 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          autoFocus
+          className="mt-1 block w-full h-12 px-4 border border-gray-400 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
         />
       </div>
       <div>
@@ -57,7 +58,7 @@ export default function NewItem() {
           value={content}
           onChange={(e) => setContent(e.target.value)}
           required
-          className="mt-1 block w-full h-60 border border-gray-400 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          className="mt-1 block w-full h-60 px-4 py-2 border border-gray-400 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
         ></textarea>
       </div>
       <div>

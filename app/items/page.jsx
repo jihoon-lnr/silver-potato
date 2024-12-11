@@ -14,7 +14,10 @@ export default async function ItemList() {
   }
 
   try {
-    const { data: items, error } = await supabase.from("items").select("*");
+    const { data: items, error } = await supabase
+      .from("items")
+      .select("*")
+      .order("created_at", { ascending: false });
 
     if (error) {
       console.error("Error fetching items:", error.message);
@@ -53,7 +56,7 @@ export default async function ItemList() {
         <table className="w-full border-collapse border border-gray-300">
           <thead>
             <tr className="bg-gray-100">
-              <th className="border border-gray-300 px-4 py-2">Title</th>
+              <th className="border border-gray-300 px-4 py-2 min-w-[400px]">Title</th>
               <th className="border border-gray-300 px-4 py-2">Author</th>
               <th className="border border-gray-300 px-4 py-2">File Name</th>
               <th className="border border-gray-300 px-4 py-2">Created At</th>
@@ -70,7 +73,7 @@ export default async function ItemList() {
               return (
                 <tr key={index} className="hover:bg-gray-50">
                   {/* Title */}
-                  <td className="border border-gray-300 px-4 py-2">
+                  <td className="border border-gray-300 px-4 py-2 min-w-[400px]">
                     <Link href={`/items/${item.id}`} className="text-blue-600 hover:underline">
                       {item.title}
                     </Link>
