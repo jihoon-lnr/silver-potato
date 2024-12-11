@@ -48,11 +48,15 @@ export default async function ItemList() {
     return (
       <div>
         <h1 className="text-xl font-bold mb-4">Item List</h1>
-        <Link href="/items/new">
-          <button className="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            New Item
-          </button>
-        </Link>
+
+        <div className="flex justify-end mb-4">
+          <Link href="/items/new">
+            <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+              New Item
+            </button>
+          </Link>
+        </div>
+
         <table className="w-full border-collapse border border-gray-300">
           <thead>
             <tr className="bg-gray-100">
